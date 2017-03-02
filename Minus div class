@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-multi-stim-multi-response.js"></script>
+    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+  </body>
+  <script>
+
+    /* define welcome message block */
+    var welcome_block = {
+      type: 'text',
+      text: 'Welcome to the experiment. Press any key to begin.'
+    };
+
+    /* define instructions block */
+    var instructions_block = {
+      type: "text",
+      text: "<p>In this game, you will visit multiple cities.</p>" +
+          "<p> You are the maintenance person for a set of buildings.</p>" +
+          "<p>The landlord will tell you what needs to be fixed. </p>" +
+          "<p> Use the J, K, and L keys to select the right option. </p>" +
+          "<p> The landlord will pay you for your work! </p>" +
+          "<img style='float:left; display:inline' src='img/city_1.png'></img>" +
+          "<p class='small'><strong>Press the J key</strong></p></div>" +
+          "<img style='float:left; display:inline' src='img/city_2.png'></img>" +
+          "<p class='small'><strong>Press the K key</strong></p></div>" +
+          "<img style='float:left; display:inline' src='img/city_3.png'></img>" +
+          "<p class='small'><strong>Press the L key</strong></p></div>" +
+          "<p>Press any key to begin.</p>",
+      timing_post_trial: 2000
+    };
+
+    /* define test trials */
+    var city1_trial = {
+      type: 'multi-stim-multi-response',
+      stimulus: ['img/c1b1.png', 'img/c1b2.png', 'img/c1b3.png'],
+      choices: [[74, 75, 76]] //allow j, k, l keys as responses
+    };
+
+    var city2_trial = {
+      type: 'multi-stim-multi-response',
+      stimulus: ['img/c2b1.png', 'img/c2b2.png', 'img/c2b3.png'],
+      choices: [[74, 75, 76]] //allow j, k, l keys as responses
+    };
+
+    var city3_trial = {
+      type: 'multi-stim-multi-response',
+      stimulus: ['img/c3b1.png', 'img/c3b2.png', 'img/c3b3.png'],
+      choices: [[74, 75, 76]] //allow j, k, l keys as responses
+    }
+
+
+    /* create experiment definition array */
+    var timeline = [];
+    timeline.push(welcome_block);
+    timeline.push(instructions_block);
+    timeline.push(city1_trial, city2_trial, city3_trial);
+
+    /* start the experiment */
+    jsPsych.init({
+      timeline: timeline,
+      fullscreen: true
+    });
+  </script>
+</html>
