@@ -18,14 +18,13 @@
         text: "Welcome to the experiment. Press any key to begin."
     };
     /* define experiment instructions block */
+
     var instructions_block = {
         type: "text",
         text: "<p>Welcome to your new job as our building manager! </p>" +
         "<p>We've had some trouble hanging onto past managers, but I don't know why. </p>" +
         "<p>You get to travel to new cities, and the pay's great.  </p>" +
-        "<div class='left center-content'><img src='img/city_1.png'></img>" +
-        "<div class='center-content'><img src='img/city_2.png'></img>" +
-        "<div class='right center-content'><img src='img/city_3.png'></img>",
+        "<div class='center-content'><img src='img/city_1.png' style='width: 60%'></img><img src='img/city_2.png' style='width: 60%'></img><img src='img/city_3.png' style='width: 60%'></img>",
         timing_post_trial: 2000
     };
     /* define town 1 message block */
@@ -45,6 +44,10 @@
         stimulus: 'img/c1b1notify.png',
         key_answer: 74,   // j
         choices: [74, 75, 76],   //j, k, l
+        show_stim_with_feedback: false,
+        correct_text: "<p class = 'text'> Thanks for fixing our house! Here's 30 dollars. </p>",
+        incorrect_text: "<p class= 'text'> Thanks for fixing our house! Here's 10 dollars. </p>",
+
         /*var rewardMoney = function(key_press){
             if (key_press = 74){
             money_total += 30;
@@ -79,7 +82,7 @@
     /* start the experiment */
     jsPsych.init({
         timeline: timeline,        //makes experiment fullscreen, but won't work in safari
-        //fullscreen: true,
+        fullscreen: true,
         on_finish: function() {
             jsPsych.data.displayData();
         }
