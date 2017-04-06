@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <title>My experiment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+</body>
+<script>
+
+    /* define welcome message block */
+    var welcome_block = {
+        type: "text",
+        text: "Welcome to the experiment. Press any key to begin."
+    };
+    /* define experiment instructions block */
+    var instructions_block = {
+        type: "text",
+        text: "<p>Welcome to your new job as our building manager! </p>" +
+        "<p>We've had some trouble hanging onto past managers, but I don't know why. </p>" +
+        "<p>You get to travel to new cities, and the pay's great.  </p>" +
+        "<div class='left center-content'><img src='img/city_1.png'></img>" +
+        "<div class='center-content'><img src='img/city_2.png'></img>" +
+        "<div class='right center-content'><img src='img/city_3.png'></img>",
+        timing_post_trial: 2000
+    };
+    /* define town 1 message block */
+    var town1_block = {
+        type: "text",
+        text: "<p>As the building manager, you'll be responsible for fixing anything that goes wrong in the houses. </p>" +
+        "<p>Some houses are more likely to have certain issues. </p>" +
+        "<p>Keep that in mind, since your tips will change depending on whether you fix the right problem. </p>" +
+        "<p>Good luck on your first day, I know you'll do great! </p>" +
+        "<div class='left center-content'><img src='img/city_1.png'></img>",
+    };
+
+    /* show stimulus and record response */
+    var money_total = 0
+    var notify_block = {
+        type: 'single-stim',
+        stimulus: 'img/c1b1notify.png',
+        key_answer: 74,   // j
+        choices: [74, 75, 76],   //j, k, l
+        /*var rewardMoney = function(key_press){
+            if (key_press = 74){
+            money_total += 30;
+            }
+            else if (key_press = 75) {
+            money_total += 10;
+            }
+            else{
+            money_total += 5;
+            }
+         };
+        rewardMoney(); */
+
+    };
+
+    /* end block */
+    var end_block = {
+        type: 'text',
+        text: "Thanks so much for fixing our house! </p>",
+    }
+
+
+    /* create experiment timeline array */
+    var timeline = [];
+    timeline.push(welcome_block);
+    timeline.push(instructions_block);
+    timeline.push(town1_block);
+    timeline.push(notify_block);
+    timeline.push(end_block);
+
+
+    /* start the experiment */
+    jsPsych.init({
+        timeline: timeline,        //makes experiment fullscreen, but won't work in safari
+        //fullscreen: true,
+        on_finish: function() {
+            jsPsych.data.displayData();
+        }
+    });
+</script>
+</html>
