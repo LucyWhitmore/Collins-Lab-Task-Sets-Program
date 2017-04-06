@@ -1,25 +1,164 @@
 <!doctype html>
 <html>
-<head>
-    <title>My experiment</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="jspsych-5.0.3/jspsych.js"></script>
-    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
-    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-</head>
-<body>
-</body>
+    <head>
+      <title>My experiment</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="jspsych-5.0.3/jspsych.js"></script>
+      <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+      <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+      <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body>
+    </body>
+    <script>
+
+    /* define welcome message block */
+    var welcome_block = {
+        type: "text",
+        text: "Welcome to the experiment. Press any key to begin."
+    };
+
+
+    /* define experiment instructions block */
+    var instructions_block = {
+        type: "text",
+        text: "<p>Welcome to your new job as our building manager! </p>" +
+        "<p>We've had some trouble hanging onto past managers, but I don't know why. </p>" +
+        "<p>You get to travel to new cities, and the pay's great.  </p>" +
+        "<div class='left center-content'><img src='img/city_1.png'></img>" +
+        "<div class='center-content'><img src='img/city_2.png'></img>" +
+        "<div class='right center-content'><img src='img/city_3.png'></img>",
+        timing_post_trial: 2000
+    };
+
+    /* define town 1 message block */
+    var town1_block = {
+        type: "text",
+        text: "<p>As the building manager, you'll be responsible for fixing anything that goes wrong in the houses. </p>" +
+        "<p>Some houses are more likely to have certain issues. </p>" +
+        "<p>Keep that in mind, since your tips will change depending on whether you fix the right problem. </p>" +
+        "<p>Good luck on your first day, I know you'll do great! </p>",
+    };
+
+    /* define town 2 message block */
+    var town2_block = {
+        type: "text",
+        text: "<p>You're doing a great job! </p>" +
+        "<p>I think you're ready to meet some of our other residents. </p>"  +
+        "<p>You'll love the town I'm sending you to tomorrow! </p>",
+    };
+
+    /* define town 3 message block */
+    var town3_block = {
+        type: "text",
+        text: "<p>You're a natural at this job!</p>" +
+        "<p>You've been doing so well here that I think it's time you saw one of our other properties. </p>",
+    };
+
+
+
+    /* define test block */
+    function experiment () {
+        var img;
+        var trial_num = 0;
+        var phase_types = [practice, city1, city2, city3, end];
+        var phase_index = -1;
+        var counter = 0;
+        var stim_bank;
+        var stim;
+        var money_total = 0;
+        var listening = false;
+
+
+
+        function stimOrder() {  //set order of stimuli/pop-ups
+            var rand_stim_order = [];
+            var k = 0;
+            function shuffle() {   //Fisher-Yates shuffle, randomly reorders stim_order
+                    var stim_order = [1, 1, 2, 2, 3, 3];
+                    var i = 0,
+                    j = 0,
+                    temp = null;
+
+                for (i = array.length - 1; i > 0; i -= 1) {
+                    j = Math.floor(Math.random() * (i + 1));
+                    temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp
+                }
+            while k<4 {
+                    shuffle(stim_order);
+                k++;
+                rand_stim_order.push(stim_order);
+            }
+            }
+
+        }
+        stimOrder();
+
+
+        // }
+         function repairReward (phase_types, rand_stim_order) {   //participant chooses action, gets reward or no reward
+             //iterate through rand_stim_order
+             //if i = 1, replace with image of city with building 1 notification, etc
+             //notifyimage visible
+             /* notify subject of building notice */
+             function notifyBlock(building) {
+                 if (building = 1) {
+                     "<div class='center-content'><img src='img/c1b1notify.png'></img>",
+                 }
+                 else if (building = 2){
+                     "<div class='center-content'><img src='img/c1b2notify.png'></img>",
+                 }
+                 else {
+                     "<div class='center-content'><img src='img/c1b3notify.png'></img>",
+                 }
+             }
+
+
+            listening = true;
+            if (key_press == correct) {
+                money_total += reward   //use message box for now?
+            }
+            else {
+                money_total += smallreward
+            }
+            listening = false;
+        "<div class='center-content'><img src='img/city_1.png'></img>",
+            //notifyimage hidden, replace image src
+
+                                            //pseudocode, need to add reward amounts for each town/house & correct key
+                                            // exclamation mark replaced with reward amount
+                                            //if wrong, just get a smaller reward and move onto the next house
+                                            //listening until key press, then show value
+            }
+         }
+    var stimorderLength = rand_stim_order.length;
+    for (var i = 0; i < stimorderLength; i++) {
+        notifyBlock(i)
+            }
+        }
+
+
+
+
+    /* create experiment timeline array */
+    var timeline = [];
+    timeline.push(welcome_block);
+    timeline.push(instructions_block);
+    timeline.push(town1_block);
+    timeline.push(test_block);
+
+    /* start the experiment */
+    jsPsych.init({
+        timeline: timeline,
+        on_finish: function() {
+            jsPsych.data.displayData();
+        }
+    })
+
+
+
+
+</script>
 </html>
-
-function experiment () {
-var img;
-var trial_num = 0;
-var phase_types = [practice, city1, city2, city3, end];
-var phase_index = -1;
-var counter = 0;
-var stim_bank;
-var stim;
-var listening = false;
-
-
-}
