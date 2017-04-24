@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
-    <head>
-      <title>My experiment</title>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-      <script src="jspsych-5.0.3/jspsych.js"></script>
-      <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
-      <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
-      <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-    </head>
-    <body>
-    </body>
-    <script>
+<head>
+    <title>My experiment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+</body>
+<script>
 
     /* define welcome message block */
     var welcome_block = {
@@ -44,7 +44,7 @@
     var town2_block = {
         type: "text",
         text: "<p>You're doing a great job! </p>" +
-        "<p>I think you're ready to meet some of our other residents. </p>"  +
+        "<p>I think you're ready to meet some of our other residents. </p>" +
         "<p>You'll love the town I'm sending you to tomorrow! </p>",
     };
 
@@ -56,88 +56,63 @@
     };
 
 
-
     /* define test block */
-    function experiment () {
+    function experiment() {
         var img;
         var trial_num = 0;
-        var phase_types = [practice, city1, city2, city3, end];
+        var phase_types = [practice, city1, city2, city3, final];
         var phase_index = -1;
         var counter = 0;
-        var stim_bank;
-        var stim;
+        var city1_stim = [
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b3notify.png'}
+        ];
+        var c1_trials = jsPsych.randomization.repeat(city1_stim, 8);
         var money_total = 0;
         var listening = false;
+        var c1b1_rewards = {j:30, k:10, l:5};
+        var c1b2_rewards = {j:10, k:30, l:5};
+        var c1b3_rewards = {j:5, k:10, l:30};
 
 
 
-        function stimOrder() {  //set order of stimuli/pop-ups
-            var rand_stim_order = [];
-            var k = 0;
-            function shuffle() {   //Fisher-Yates shuffle, randomly reorders stim_order
-                    var stim_order = [1, 1, 2, 2, 3, 3];
-                    var i = 0,
-                    j = 0,
-                    temp = null;
 
-                for (i = array.length - 1; i > 0; i -= 1) {
-                    j = Math.floor(Math.random() * (i + 1));
-                    temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp
+        function repairReward(phase_types, rand_stim_order) {
+            function notifyBlock(building) {
+                if (building == 1) {                                 //how to make i=building
+                    "<div class='center-content'><img src='img/c1b1notify.png'></img>",   // building = i
                 }
-            while k<4 {
-                    shuffle(stim_order);
-                k++;
-                rand_stim_order.push(stim_order);
+                else if (building == 2) {
+                    "<div class='center-content'><img src='img/c1b2notify.png'></img>",
+                }
+                else {
+                    "<div class='center-content'><img src='img/c1b3notify.png'></img>",
+                }
             }
-            }
-
-        }
-        stimOrder();
-
-
-        // }
-         function repairReward (phase_types, rand_stim_order) {   //participant chooses action, gets reward or no reward
-             //iterate through rand_stim_order
-             //if i = 1, replace with image of city with building 1 notification, etc
-             //notifyimage visible
-             /* notify subject of building notice */
-             function notifyBlock(building) {
-                 if (building = 1) {
-                     "<div class='center-content'><img src='img/c1b1notify.png'></img>",
-                 }
-                 else if (building = 2){
-                     "<div class='center-content'><img src='img/c1b2notify.png'></img>",
-                 }
-                 else {
-                     "<div class='center-content'><img src='img/c1b3notify.png'></img>",
-                 }
-             }
-
 
             listening = true;
-            if (key_press == correct) {
-                money_total += reward   //use message box for now?
-            }
-            else {
-                money_total += smallreward
+            window.onkeydown = function (event) {
+                if (event.keyCode === 74) {
+                    money_total += c1b1_rewards.j;
+                }
+                else if (event.keyCode === 75) {
+                    money_total += c1b1_rewards.k;
+                }
+                else if (event.keyCode === 76) {
+                    money_total += c1b1_rewards.l;
+                }
             }
             listening = false;
-        "<div class='center-content'><img src='img/city_1.png'></img>",
-            //notifyimage hidden, replace image src
+            "<div class='center-content'><img src='img/city_1.png'></img>" //notifyimage hidden, replace image src
+            for (var i = 0; i < rand_stim_order.length; i++) {   //move to end?
+                notify_block(i)
+            }
 
-                                            //pseudocode, need to add reward amounts for each town/house & correct key
-                                            // exclamation mark replaced with reward amount
-                                            //if wrong, just get a smaller reward and move onto the next house
-                                            //listening until key press, then show value
-            }
-         }
-    var stimorderLength = rand_stim_order.length;
-    for (var i = 0; i < stimorderLength; i++) {
-        notifyBlock(i)
-            }
+
         }
+    }
+
 
 
 
@@ -152,12 +127,10 @@
     /* start the experiment */
     jsPsych.init({
         timeline: timeline,
-        on_finish: function() {
+        on_finish: function () {
             jsPsych.data.displayData();
         }
     })
-
-
 
 
 </script>
