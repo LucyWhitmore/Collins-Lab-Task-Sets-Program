@@ -15,7 +15,7 @@
     /* define welcome message block */
     var welcome_block = {
         type: "text",
-        text: "Welcome to the experiment. Press any key to begin."
+        text: "Welcome to the experiment. Press the spacebar to advance."
     };
 
 
@@ -37,51 +37,73 @@
         text: "<p>As the building manager, you'll be responsible for fixing anything that goes wrong in the houses. </p>" +
         "<p>Some houses are more likely to have certain issues. </p>" +
         "<p>Keep that in mind, since your tips will change depending on whether you fix the right problem. </p>" +
-        "<p>Good luck on your first day, I know you'll do great! </p>",
+        "<p>Good luck on your first day, I know you'll do great! </p>" +
+        "<div class='left center-content'><img src='img/city_1.png'></img>",
     };
 
-    /* define town 2 message block */
+    /* define town 2 message block
     var town2_block = {
         type: "text",
         text: "<p>You're doing a great job! </p>" +
         "<p>I think you're ready to meet some of our other residents. </p>" +
         "<p>You'll love the town I'm sending you to tomorrow! </p>",
-    };
+    }; */
 
-    /* define town 3 message block */
+    /* define town 3 message block
     var town3_block = {
         type: "text",
         text: "<p>You're a natural at this job!</p>" +
         "<p>You've been doing so well here that I think it's time you saw one of our other properties. </p>",
-    };
+    };   */
 
 
     /* define test block */
-    function experiment() {
-        var img;
-        var trial_num = 0;
-        var phase_types = [practice, city1, city2, city3, final];
-        var phase_index = -1;
-        var counter = 0;
+      //  var img;
+     //   var trial_num = 0;
+     //   var phase_types = [practice, city1, city2, city3, final];
+     //   var phase_index = -1;
+     //   var counter = 0;
         var city1_stim = [
             {stimulus: 'img/c1b1notify.png'},
             {stimulus: 'img/c1b2notify.png'},
             {stimulus: 'img/c1b3notify.png'}
         ];
         var c1_trials = jsPsych.randomization.repeat(city1_stim, 8);
-        var money_total = 0;
-        var listening = false;
-        var c1b1_rewards = {j:30, k:10, l:5};
-        var c1b2_rewards = {j:10, k:30, l:5};
-        var c1b3_rewards = {j:5, k:10, l:30};
+      //  var money_total = 0;
+    //    var listening = false;
+     //   var c1b1_rewards = {j:30, k:10, l:5};
+       // var c1b2_rewards = {j:10, k:30, l:5};
+      //  var c1b3_rewards = {j:5, k:10, l:30};
+      //  var c1_rewards = [[72, 30, 10, 5], [73, 10, 30, 10], [74, 5, 5, 30]]; //column keys, rows buildings
+
+
+        var test_block = {
+            type: 'single-stim',
+            choices: [74, 75, 76],     //need to make this var test_block
+            timeline: c1_trials,
+            prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.",
+            on_finish: window.onkeydown = function (event) {
+                if (event.keyCode === 74) {
+                    alert("Thanks for fixing our house! Here's 30 dollars.");
+                }
+                else if (event.keyCode === 75) {
+                    alert("Thanks for fixing our house! Here's 5 dollars.");
+                }
+                else if (event.keyCode === 76) {
+                    alert("Thanks for fixing our house! Here's 10 dollars.");
+                }
+            }
+        };
 
 
 
-
-        function repairReward(phase_types, rand_stim_order) {
+       /* function repairReward(phase_types, rand_stim_order) {
+                type: 'single-stim',
+                choices: [74, 75, 76],     //need to make this var test_block
+                timeline: c1_trials;
             function notifyBlock(building) {
                 if (building == 1) {                                 //how to make i=building
-                    "<div class='center-content'><img src='img/c1b1notify.png'></img>",   // building = i
+                    "<div class='center-content'><img src='img/c1b1notify.png'></img>",;   // building = i
                 }
                 else if (building == 2) {
                     "<div class='center-content'><img src='img/c1b2notify.png'></img>",
@@ -102,16 +124,15 @@
                 else if (event.keyCode === 76) {
                     money_total += c1b1_rewards.l;
                 }
-            }
+            };
             listening = false;
-            "<div class='center-content'><img src='img/city_1.png'></img>" //notifyimage hidden, replace image src
+            "<div class='center-content'><img src='img/city_1.png'></img>"; //notifyimage hidden, replace image src
             for (var i = 0; i < rand_stim_order.length; i++) {   //move to end?
                 notify_block(i)
             }
 
 
-        }
-    }
+        };; */
 
 
 
@@ -127,6 +148,7 @@
     /* start the experiment */
     jsPsych.init({
         timeline: timeline,
+        fullscreen: true,
         on_finish: function () {
             jsPsych.data.displayData();
         }
