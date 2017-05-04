@@ -32,7 +32,7 @@
     };
 
     /* define town 1 message block */
-    var town1_block = {
+    var city1_block = {
         type: "text",
         text: "<p>As the building manager, you'll be responsible for fixing anything that goes wrong in the houses. </p>" +
         "<p>Some houses are more likely to have certain issues. </p>" +
@@ -41,20 +41,20 @@
         "<div class='left center-content'><img src='img/city_1.png'></img>",
     };
 
-    /* define town 2 message block
-    var town2_block = {
+    /*define town 2 message block */
+    var city2_block = {
         type: "text",
         text: "<p>You're doing a great job! </p>" +
         "<p>I think you're ready to meet some of our other residents. </p>" +
         "<p>You'll love the town I'm sending you to tomorrow! </p>",
-    }; */
+    };
 
-    /* define town 3 message block
-    var town3_block = {
+    /* define town 3 message block */
+    var city3_block = {
         type: "text",
         text: "<p>You're a natural at this job!</p>" +
         "<p>You've been doing so well here that I think it's time you saw one of our other properties. </p>",
-    };   */
+    };
 
 
     /* define test block */
@@ -63,12 +63,27 @@
      //   var phase_types = [practice, city1, city2, city3, final];
      //   var phase_index = -1;
      //   var counter = 0;
-        var city1_stim = [
+    /*    var city1_stim = [
             {stimulus: 'img/c1b1notify.png'},
             {stimulus: 'img/c1b2notify.png'},
             {stimulus: 'img/c1b3notify.png'}
         ];
-        var c1_trials = jsPsych.randomization.repeat(city1_stim, 8);
+        var c1_trials = jsPsych.randomization.repeat(city1_stim, [2, 2, 2]); */
+
+    var city2_stim = [
+        {stimulus: 'img/c2b1notify.png'},
+        {stimulus: 'img/c2b2notify.png'},
+        {stimulus: 'img/c2b3notify.png'}
+    ];
+    var c2_trials = jsPsych.randomization.repeat(city2_stim, 8);
+
+    var city3_stim = [
+        {stimulus: 'img/c3b1notify.png'},
+        {stimulus: 'img/c3b2notify.png'},
+        {stimulus: 'img/c3b3notify.png'}
+    ];
+
+    var c3_trials = jsPsych.randomization.repeat(city3_stim, 8);
       //  var money_total = 0;
     //    var listening = false;
      //   var c1b1_rewards = {j:30, k:10, l:5};
@@ -77,11 +92,17 @@
       //  var c1_rewards = [[72, 30, 10, 5], [73, 10, 30, 10], [74, 5, 5, 30]]; //column keys, rows buildings
 
 
-        var test_block = {
+        var city1_test_block = {
             type: 'single-stim',
             choices: [74, 75, 76],     //need to make this var test_block
-            timeline: c1_trials,
+            //timeline: c1_trials,
             prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.",
+           timeline: [
+               {stimulus: 'img/c1b1notify.png'},
+               {stimulus: 'img/c1b2notify.png'},
+               {stimulus: 'img/c1b3notify.png'}
+           ],
+            randomize_order: true,
             on_finish: window.onkeydown = function (event) {
                 if (event.keyCode === 74) {
                     alert("Thanks for fixing our house! Here's 30 dollars.");
@@ -95,6 +116,58 @@
             }
         };
 
+    /* var loop_node = {
+        timeline: [city1_test_block],
+        loop_function: function(){  //problem is with not calling function?
+        //for (i=0; i<2; i++){                //while loop?
+            return true;                    //return true exiting function?
+        //}
+
+            }
+
+    }; */
+
+
+
+
+
+    var city2_test_block = {
+        type: 'single-stim',
+        choices: [74, 75, 76],     //need to make this var test_block
+        timeline: c2_trials,
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.",
+        on_finish: window.onkeydown = function (event) {
+            if (event.keyCode === 74) {
+                alert("Thanks for fixing our house! Here's 30 dollars.");
+            }
+            else if (event.keyCode === 75) {
+                alert("Thanks for fixing our house! Here's 5 dollars.");
+            }
+            else if (event.keyCode === 76) {
+                alert("Thanks for fixing our house! Here's 10 dollars.");
+            }
+        }
+    };
+
+
+
+    var city3_test_block = {
+        type: 'single-stim',
+        choices: [74, 75, 76],     //need to make this var test_block
+        timeline: c3_trials,
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.",
+        on_finish: window.onkeydown = function (event) {
+            if (event.keyCode === 74) {
+                alert("Thanks for fixing our house! Here's 30 dollars.");
+            }
+            else if (event.keyCode === 75) {
+                alert("Thanks for fixing our house! Here's 5 dollars.");
+            }
+            else if (event.keyCode === 76) {
+                alert("Thanks for fixing our house! Here's 10 dollars.");
+            }
+        }
+    };
 
 
        /* function repairReward(phase_types, rand_stim_order) {
@@ -142,13 +215,19 @@
     var timeline = [];
     timeline.push(welcome_block);
     timeline.push(instructions_block);
-    timeline.push(town1_block);
-    timeline.push(test_block);
+    timeline.push(city1_block);
+    timeline.push(city1_test_block);
+    //timeline.push(loop_node);
+    timeline.push(city2_block);
+    timeline.push(city2_test_block);
+    timeline.push(city3_block);
+    timeline.push(city3_test_block);
+
 
     /* start the experiment */
     jsPsych.init({
         timeline: timeline,
-        fullscreen: true,
+        //fullscreen: true,
         on_finish: function () {
             jsPsych.data.displayData();
         }
