@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+    <title>My experiment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-categorize.js"></script>
+    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+</body>
+<script>
+
+
+    /* define welcome message block */
+    var welcome_block = {
+        type: "text",
+        text: "Welcome to the experiment. Press the spacebar to advance."
+    };
+
+
+    /* define experiment instructions block */
+    var instructions_block = {
+        type: "text",
+        text: "<p>Welcome to your new job as our building manager! </p>" +
+        "<p>We've had some trouble hanging onto past managers, but I don't know why. </p>" +
+        "<p>You get to travel to new cities, and the pay's great.  </p>" +
+        "<div class='left center-content'><img src='img/city_1.png'></img>" +
+        "<div class='center-content'><img src='img/city_2.png'></img>" +
+        "<div class='right center-content'><img src='img/city_3.png'></img>",
+        timing_post_trial: 2000
+    };
+
+    /* define town 1 message block */
+    var city1_block = {
+        type: "text",
+        text: "<p>As the building manager, you'll be responsible for fixing anything that goes wrong in the houses. </p>" +
+        "<p>Some houses are more likely to have certain issues. </p>" +
+        "<p>Keep that in mind, since your tips will change depending on whether you fix the right problem. </p>" +
+        "<p>Good luck on your first day, I know you'll do great! </p>" +
+        "<div class='left center-content'><img src='img/city_1.png'></img>",
+    };
+
+    /*define town 2 message block */
+    var city2_block = {
+        type: "text",
+        text: "<p>You're doing a great job! </p>" +
+        "<p>I think you're ready to meet some of our other residents. </p>" +
+        "<p>You'll love the town I'm sending you to tomorrow! </p>",
+    };
+
+    /* define town 3 message block */
+    var city3_block = {
+        type: "text",
+        text: "<p>You're a natural at this job!</p>" +
+        "<p>You've been doing so well here that I think it's time you saw one of our other properties. </p>",
+    };
+
+    var c1b1_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1b1notify.png',
+        key_answer: 74,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 30 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 10 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c1b2_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1b2notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 20 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 15 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c1b3_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1b3notify.png',
+        key_answer: 76,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 35 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 25 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c2b1_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2b1notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 30 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 10 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c2b2_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2b2notify.png',
+        key_answer: 76,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 20 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 15 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c2b3_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2b3notify.png',
+        key_answer: 74,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 35 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 25 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3b1_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3b1notify.png',
+        key_answer: 76,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 30 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 10 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3b2_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3b2notify.png',
+        key_answer: 74,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 20 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 15 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3b3_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3b3notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 35 dollars.</p>",
+        incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 25 dollars.</p>",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+
+    /* create experiment timeline array */
+    var timeline = [];
+    timeline.push(welcome_block);
+    timeline.push(instructions_block);
+    timeline.push(city1_block);       //move to city 1
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b3_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b2_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(c1b1_test_block);
+    timeline.push(city2_block);         //move to city 2
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b3_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b2_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(c2b1_test_block);
+    timeline.push(city3_block);       //move to city 3
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b3_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b2_test_block);
+    timeline.push(c3b1_test_block);
+    timeline.push(c3b1_test_block);
+
+
+    /* start the experiment */
+   /* if (SubjID % 3) {
+        timeline = timeline1
+    } else
+    */
+
+    jsPsych.init({
+        timeline: timeline,
+        on_finish: function () {
+            jsPsych.data.displayData();
+        }
+    })
+
+
+</script>
+</html>
