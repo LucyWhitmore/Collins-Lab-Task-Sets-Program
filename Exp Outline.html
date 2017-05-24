@@ -63,12 +63,33 @@
      //   var phase_types = [practice, city1, city2, city3, final];
      //   var phase_index = -1;
      //   var counter = 0;
-    /*    var city1_stim = [
+       var city1_stim = [
             {stimulus: 'img/c1b1notify.png'},
             {stimulus: 'img/c1b2notify.png'},
-            {stimulus: 'img/c1b3notify.png'}
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b1notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b2notify.png'},
+            {stimulus: 'img/c1b3notify.png'},
+            {stimulus: 'img/c1b1notify.png'}
         ];
-        var c1_trials = jsPsych.randomization.repeat(city1_stim, [2, 2, 2]); */
+        //var c1_trials = jsPsych.randomization.repeat(city1_stim, [2, 2, 2]);
 
     var city2_stim = [
         {stimulus: 'img/c2b1notify.png'},
@@ -95,14 +116,8 @@
         var city1_test_block = {
             type: 'single-stim',
             choices: [74, 75, 76],     //need to make this var test_block
-            //timeline: c1_trials,
+            timeline: city1_stim,
             prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.",
-           timeline: [
-               {stimulus: 'img/c1b1notify.png'},
-               {stimulus: 'img/c1b2notify.png'},
-               {stimulus: 'img/c1b3notify.png'}
-           ],
-            randomize_order: true,
             on_finish: window.onkeydown = function (event) {
                 if (event.keyCode === 74) {
                     alert("Thanks for fixing our house! Here's 30 dollars.");
