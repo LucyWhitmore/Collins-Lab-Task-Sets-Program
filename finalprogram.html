@@ -23,7 +23,9 @@
     var subj_id = prompt("Please enter your subject ID.");
     var dob = prompt("Please enter your date of birth, as MM/DD/YY");
     var gender = prompt("Please enter your gender.");
-    var age = prompt("Please enter your age.");      //don't need this and dob, redundant
+    var handedness = prompt("Are you right or left handed?");
+    var occupation = prompt("Please enter your occupation.");
+    var ed_level = prompt("What is your highest level of education?");
 
 
     /* define experiment instructions block */
@@ -64,12 +66,20 @@
     };
 
 
-    /* define town 3 message block */
+    /* define version 2 message block */
+    var version2_block = {
+        type: "text",
+        text: "<p>You've been doing so well that we've been able to buy some more properties!</p>" +
+        "<p>Unfortunately, our payroll system is down, so you won't be able to see your tips until we fix it.</p>" +
+        "<p> You've been so great than I know you'll do just fine.</p>",
+    };
+
     var city4_block = {
         type: "text",
         text: "<p>I think you're the best manager we've ever had!</p>" +
-        "<p>Unfortunately, our payroll system is down, so you won't be able to see your tips until we fix it.</p>" +
-        "<p> You've been doing so well than I know you'll be just fine.</p>",
+        "<p>You're ready for our newest city. </p>" +
+        "<p>We still haven't heard anything about that pesky payroll problem, but you can do it.</p>",
+
     };
 
     var c1b1_test_block = {
@@ -79,7 +89,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 1 dollar.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -90,7 +100,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 2 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -101,7 +111,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 3 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -112,7 +122,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 6 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -123,7 +133,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 4 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -134,7 +144,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 5 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -145,7 +155,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 8 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -156,7 +166,7 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 9 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -167,7 +177,127 @@
         choices: [74, 75, 76],
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 7 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
-        timing_feedback_duration: 4000,
+        timing_feedback_duration: 3000,
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c1v2b1_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1v2b1notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c1v2b2_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1v2b2notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c1v2b3_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1v2b3notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c1v2b4_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c1v2b4notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+    var c2v2b1_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2v2b1notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c2v2b2_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2v2b2notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+
+    var c2v2b3_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2v2b3notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c2v2b4_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c2v2b4notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3v2b1_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3v2b1notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3v2b2_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3v2b2notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3v2b3_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3v2b3notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
+        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+    };
+
+    var c3v2b4_test_block = {
+        type: 'categorize',
+        stimulus: 'img/c3v2b4notify.png',
+        key_answer: 75,
+        choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -176,6 +306,8 @@
         stimulus: 'img/c4b1notify.png',
         key_answer: 75,
         choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -184,6 +316,8 @@
         stimulus: 'img/c4b2notify.png',
         key_answer: 75,
         choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
@@ -192,13 +326,15 @@
         stimulus: 'img/c4b3notify.png',
         key_answer: 75,
         choices: [74, 75, 76],
+        correct_text: "",
+        incorrect_text: "",
         prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
     };
 
 
     /* create experiment timeline array */
     var timeline = [];
-    timeline.push(welcome_block);
+    /*timeline.push(welcome_block);
     timeline.push(instructions_block);
     timeline.push(city1_block);       //move to city 1
     timeline.push(c1b3_test_block);
@@ -275,6 +411,57 @@
     timeline.push(c3b2_test_block);
     timeline.push(c3b1_test_block);
     timeline.push(c3b1_test_block);
+    timeline.push(version2_block);   //move to city 1, version 2 (extra house)
+    timeline.push(c1v2b4_test_block);
+    timeline.push(c1v2b3_test_block);
+    timeline.push(c1v2b1_test_block);
+    timeline.push(c1v2b1_test_block);
+    timeline.push(c1v2b3_test_block);
+    timeline.push(c1v2b2_test_block);
+    timeline.push(c1v2b4_test_block);
+    timeline.push(c1v2b2_test_block);
+    timeline.push(c1v2b2_test_block);
+    timeline.push(c1v2b4_test_block);
+    timeline.push(c1v2b1_test_block);
+    timeline.push(c1v2b4_test_block);
+    timeline.push(c1v2b3_test_block);
+    timeline.push(c1v2b2_test_block);
+    timeline.push(c1v2b3_test_block);
+    timeline.push(c1v2b1_test_block);
+                                        //move to city 2, version 2
+    timeline.push(c2v2b4_test_block);
+    timeline.push(c2v2b3_test_block);
+    timeline.push(c2v2b1_test_block);
+    timeline.push(c2v2b1_test_block);
+    timeline.push(c2v2b3_test_block);
+    timeline.push(c2v2b2_test_block);
+    timeline.push(c2v2b4_test_block);
+    timeline.push(c2v2b2_test_block);
+    timeline.push(c2v2b2_test_block);
+    timeline.push(c2v2b4_test_block);
+    timeline.push(c2v2b1_test_block);
+    timeline.push(c2v2b4_test_block);
+    timeline.push(c2v2b3_test_block);
+    timeline.push(c2v2b2_test_block);
+    timeline.push(c2v2b3_test_block);
+    timeline.push(c2v2b1_test_block);
+                                        //move to city 3, version 2
+    timeline.push(c3v2b4_test_block);
+    timeline.push(c3v2b3_test_block);
+    timeline.push(c3v2b1_test_block);
+    timeline.push(c3v2b1_test_block);
+    timeline.push(c3v2b3_test_block);
+    timeline.push(c3v2b2_test_block);
+    timeline.push(c3v2b4_test_block);
+    timeline.push(c3v2b2_test_block);
+    timeline.push(c3v2b2_test_block);
+    timeline.push(c3v2b4_test_block);
+    timeline.push(c3v2b1_test_block);
+    timeline.push(c3v2b4_test_block);
+    timeline.push(c3v2b3_test_block);
+    timeline.push(c3v2b2_test_block);
+    timeline.push(c3v2b3_test_block);
+    timeline.push(c3v2b1_test_block);
     timeline.push(city4_block);       //move to city 4
     timeline.push(c4b3_test_block);
     timeline.push(c4b2_test_block);
@@ -295,7 +482,7 @@
     timeline.push(c4b3_test_block);
     timeline.push(c4b1_test_block);
     timeline.push(c4b3_test_block);
-    timeline.push(c4b3_test_block);
+    timeline.push(c4b3_test_block);   */
     timeline.push(c4b2_test_block);
     timeline.push(c4b2_test_block);
     timeline.push(c4b1_test_block);
@@ -310,12 +497,23 @@
         }
     */
 
+
+    function saveData(subj_id, filedata){                                       //saves data to CSV file
+        $.ajax({
+            type:'post',
+            cache: false,
+            url: 'save_data.php', // this is the path to the above PHP script
+            data: {filename: subj_id, filedata: filedata}
+        });
+    }
+
     jsPsych.init({
         timeline: timeline,
         fullscreen: true,
-        on_finish: function () {
+        /*on_finish: function () {                            //
             jsPsych.data.displayData();
-        }
+        }, */
+        on_finish: function(data){ saveData("filename.csv", jsPsych.data.dataAsCSV()) }     //calls function to save data
     })
 
 
