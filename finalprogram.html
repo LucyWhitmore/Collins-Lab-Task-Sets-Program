@@ -8,9 +8,31 @@
     <script src="jspsych-5.0.3/plugins/jspsych-categorize.js"></script>
     <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 </head>
+<style>
+    body {
+        background-color: #D0F9EC;
+    }
+</style>
 <body>
+<form>
+    Please enter your subject ID.          <input id="subj_id" type="text" /><br>
+    Please enter your date of birth, as MM/DD/YY.     <input id="dob" type="text" /><br>
+    Please enter your gender.               <input id="gender" type="text" /><br>
+    Are you right or left handed?         <input id="handedness" type="text" /><br>
+    Please enter your occupation.           <input id="occupation" type="text" /><br>
+    What is your highest level of education?     <input id="ed_level" type="text" /><br>
+
+</form>
 </body>
 <script>
+
+    /* define subject info collection block */
+    var subj_id = document.getElementById("subj_id").value;     //html textbox
+    var dob = document.getElementById("dob").value;
+    var gender = document.getElementById("gender").value;
+    var handedness = document.getElementById("handedness").value;
+    var occupation = document.getElementById("occupation").value;
+    var ed_level = document.getElementById("ed_level").value;
 
 
     /* define welcome message block */
@@ -19,13 +41,6 @@
         text: "Welcome to the experiment. Press the spacebar to advance."
     };
 
-    /* define subject info collection block */
-    var subj_id = prompt("Please enter your subject ID.");
-    var dob = prompt("Please enter your date of birth, as MM/DD/YY");
-    var gender = prompt("Please enter your gender.");
-    var handedness = prompt("Are you right or left handed?");
-    var occupation = prompt("Please enter your occupation.");
-    var ed_level = prompt("What is your highest level of education?");
 
 
     /* define experiment instructions block */
