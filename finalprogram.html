@@ -9,12 +9,14 @@
     <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 </head>
 <style>
+    <!--sets the background color, only works in non-fullscreen  -->
     body {
         background-color: #D0F9EC;
     }
 </style>
 <body>
 <form>
+    <!--creates prompt boxes for subject information, single page, only works in fullscreen -->
     Please enter your subject ID.          <input id="subj_id" type="text" /><br>
     Please enter your date of birth, as MM/DD/YY.     <input id="dob" type="text" /><br>
     Please enter your gender.               <input id="gender" type="text" /><br>
@@ -27,12 +29,16 @@
 <script>
 
     /* define subject info collection block */
-    var subj_id = document.getElementById("subj_id").value;     //html textbox
+    var subj_id = document.getElementById("subj_id").value;     //sets variables to information collected from textboxes
     var dob = document.getElementById("dob").value;
     var gender = document.getElementById("gender").value;
     var handedness = document.getElementById("handedness").value;
     var occupation = document.getElementById("occupation").value;
     var ed_level = document.getElementById("ed_level").value;
+
+
+    /* The text blocks below define the messages that are shown between each new stage, i.e. each new city. They are in
+    chronological order, and are inserted into the timeline at the end of the program. */
 
 
     /* define welcome message block */
@@ -81,7 +87,7 @@
     };
 
 
-    /* define version 2 message block */
+    /* define version 2 (repeat cities with additional house) message block */
     var version2_block = {
         type: "text",
         text: "<p>You've been doing so well that we've been able to buy some more properties!</p>" +
@@ -97,15 +103,21 @@
 
     };
 
+    /* The test blocks defined below are the actual experimental blocks. Each block contains the path to the stimulus
+    image, the key that will give the highest reward, and the allowed keys, as well as the text of the feedback message,
+     and the length of feedback presentation. "Prompt" refers to the instructions below the image, which prompt the
+     subject to take an action. */
+
+    /* Test block for city 1, one block per house */
     var c1b1_test_block = {
         type: 'categorize',
         stimulus: 'img/c1b1notify.png',
-        key_answer: 74,
-        choices: [74, 75, 76],
+        key_answer: 74,                           // 74 = j, j will give the largest reward
+        choices: [74, 75, 76],                    // 74 = j, 75 = k, 76 = l, pressing any other keys will not lead to a response
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 1 dollar.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."
     };
 
     var c1b2_test_block = {
@@ -116,7 +128,7 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 2 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."
     };
 
     var c1b3_test_block = {
@@ -127,8 +139,10 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 3 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."
     };
+
+    /* Test block for city 2, one block per house */
 
     var c2b1_test_block = {
         type: 'categorize',
@@ -138,8 +152,7 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 6 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c2b2_test_block = {
         type: 'categorize',
@@ -149,8 +162,7 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 4 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c2b3_test_block = {
         type: 'categorize',
@@ -160,8 +172,9 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 5 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
+
+    /* Test block for city 3, one block per house */
 
     var c3b1_test_block = {
         type: 'categorize',
@@ -171,8 +184,7 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 8 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c3b2_test_block = {
         type: 'categorize',
@@ -182,8 +194,7 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 9 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c3b3_test_block = {
         type: 'categorize',
@@ -193,8 +204,9 @@
         correct_text: "<p class='prompt'>Thanks for fixing our house! Here's 7 dollars.</p>",
         incorrect_text: "<p class='prompt'>Thanks for fixing our house! Here's 0 dollars.</p>",
         timing_feedback_duration: 3000,
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
+
+    /* Test block for city 1 version 2 (additional house), one block per house */
 
     var c1v2b1_test_block = {
         type: 'categorize',
@@ -203,8 +215,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c1v2b2_test_block = {
         type: 'categorize',
@@ -213,8 +224,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c1v2b3_test_block = {
         type: 'categorize',
@@ -223,8 +233,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c1v2b4_test_block = {
         type: 'categorize',
@@ -233,8 +242,9 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
+
+    /* Test block for city 2 version 2 (additional house), one block per house */
     var c2v2b1_test_block = {
         type: 'categorize',
         stimulus: 'img/c2v2b1notify.png',
@@ -242,8 +252,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c2v2b2_test_block = {
         type: 'categorize',
@@ -252,8 +261,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
 
     var c2v2b3_test_block = {
@@ -263,8 +271,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c2v2b4_test_block = {
         type: 'categorize',
@@ -273,8 +280,9 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
+
+    /* Test block for city 3 version 2 (additional house), one block per house */
 
     var c3v2b1_test_block = {
         type: 'categorize',
@@ -283,8 +291,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c3v2b2_test_block = {
         type: 'categorize',
@@ -293,8 +300,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c3v2b3_test_block = {
         type: 'categorize',
@@ -303,8 +309,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c3v2b4_test_block = {
         type: 'categorize',
@@ -313,8 +318,9 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
+
+    /* Test block for city 4, one block per house */
 
     var c4b1_test_block = {
         type: 'categorize',
@@ -323,8 +329,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c4b2_test_block = {
         type: 'categorize',
@@ -333,8 +338,7 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
     var c4b3_test_block = {
         type: 'categorize',
@@ -343,11 +347,11 @@
         choices: [74, 75, 76],
         correct_text: "",
         incorrect_text: "",
-        prompt: "<p class='prompt'>To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key.</p>"
-    };
+        prompt: "To mow the lawn, press the 'J' key. To repaint the house, press the 'K' key. To fix the pipes, press the 'L' key."    };
 
 
     /* create experiment timeline array */
+    /* push blocks to timeline to create pseduorandomized order */
     var timeline = [];
     timeline.push(welcome_block);
     timeline.push(instructions_block);
@@ -506,7 +510,7 @@
         $.ajax({
             type:'post',
             cache: false,
-            url: 'save_data.php', // this is the path to the above PHP script
+            url: 'save_data.php',                                               // this is the path to the PHP script
             data: {filename: subj_id, filedata: filedata}
         });
     }
